@@ -19,6 +19,11 @@ export class RecipesService {
   getRecipes() {
     return this.recipeModel.find();
   }
+  async searchRecipesByName(search: string): Promise<Recipe[]> {
+    const regex = new RegExp(search, 'i');
+
+    return this.recipeModel.find({ name: regex }).exec();
+  }
 
   getRecipeById(id: string) {
     return this.recipeModel.findById(id);

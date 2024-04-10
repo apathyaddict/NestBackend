@@ -5,6 +5,7 @@ import {
   HttpException,
   Param,
   Post,
+  Query,
 } from '@nestjs/common';
 
 import mongoose from 'mongoose';
@@ -23,9 +24,18 @@ export class RecipesController {
     return this.recipesService.createRecipe(createRecipeDto);
   }
 
+  // @Get()
+  // getrecipes() {
+  //   return this.recipesService.getRecipes();
+  // }
+
   @Get()
-  getrecipes() {
-    return this.recipesService.getRecipes();
+  getRecipes(@Query('search') search?: string) {
+    if (search) {
+      return this.recipesService.searchRecipesByName(search);
+    } else {
+      return this.recipesService.getRecipes();
+    }
   }
 
   @Get(':id')
