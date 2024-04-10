@@ -20,14 +20,8 @@ export class RecipesController {
 
   @Post()
   createRecipe(@Body() createRecipeDto: CreateRecipeDto) {
-    console.log(createRecipeDto);
     return this.recipesService.createRecipe(createRecipeDto);
   }
-
-  // @Get()
-  // getrecipes() {
-  //   return this.recipesService.getRecipes();
-  // }
 
   @Get()
   getRecipes(@Query('search') search?: string) {
